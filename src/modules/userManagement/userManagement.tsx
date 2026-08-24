@@ -17,7 +17,7 @@ type User = {
   is_deleted: boolean;
 };
 
-type StatusFilter = "all" | "active" | "blocked";
+type StatusFilter = "all" | "active" | "blocked" | "deleted";
 type SortKey = "name" | "joined" | null;
 type SortDir = "asc" | "desc";
 
@@ -86,7 +86,7 @@ function SortDropdown({ value, onChange }: { value: SortKey; onChange: (v: SortK
         <div style={{
           position: "absolute", top: "calc(100% + 0.5vh)", right: 0,
           backgroundColor: "#fff", border: "1px solid #F1F5F9",
-          borderRadius: "0.6vw", boxShadow: "0 0.5vh 1.5vw rgba(0,0,0,0.08)",
+          borderRadius: "0.6vw", boxShadow: "0px 4px 4px 0px rgba(0,0,0,0.25), 0px 0px 2px 0px rgba(0,0,0,0.16)",
           zIndex: 100, minWidth: "max-content", overflow: "hidden",
         }}>
           {options.map((opt) => (
@@ -128,6 +128,7 @@ function StatusDropdown({ value, onChange }: { value: StatusFilter; onChange: (v
     { label: "All", value: "all" },
     { label: "Active", value: "active" },
     { label: "Blocked", value: "blocked" },
+    { label: "Deleted", value: "deleted" },
   ];
 
   return (
@@ -157,7 +158,7 @@ function StatusDropdown({ value, onChange }: { value: StatusFilter; onChange: (v
         <div style={{
           position: "absolute", top: "calc(100% + 0.5vh)", right: 0,
           backgroundColor: "#fff", border: "1px solid #F1F5F9",
-          borderRadius: "0.6vw", boxShadow: "0 0.5vh 1.5vw rgba(0,0,0,0.08)",
+          borderRadius: "0.6vw", boxShadow: "0px 4px 4px 0px rgba(0,0,0,0.25), 0px 0px 2px 0px rgba(0,0,0,0.16)",
           zIndex: 100, minWidth: "fit-content", overflow: "hidden",
         }}>
           {options.map((opt) => (
@@ -216,8 +217,9 @@ export default function UserManagement() {
       const matchSearch = fullName.includes(search.toLowerCase()) || u.email.toLowerCase().includes(search.toLowerCase());
       const matchStatus =
         statusFilter === "all" ? true :
-        statusFilter === "active" ? u.is_active && !u.is_blocked :
-        u.is_blocked;
+        statusFilter === "active" ? u.is_active && !u.is_blocked && !u.is_deleted :
+        statusFilter === "blocked" ? u.is_blocked :
+        u.is_deleted;
       return matchSearch && matchStatus;
     })
     .sort((a, b) => {
@@ -341,22 +343,22 @@ export default function UserManagement() {
                       </td>
 
                       {/* User Name */}
-                      <td style={{ padding: "1.2vh 1.2vw", fontSize: "0.85vw", fontWeight: 500, color: "#1C1B17", textAlign: "center" }}>
+                      <td style={{ padding: "1.2vh 1.2vw", fontSize: "0.85vw", fontWeight: 500, color: (status === "deleted" || status === "blocked") ? "rgba(107, 114, 128, 1)" : "#1C1B17", textAlign: "center" }}>
                         {user.first_name} {user.last_name}
                       </td>
 
                       {/* Role */}
-                      <td style={{ padding: "1.2vh 1.2vw", textAlign: "center", fontSize: "0.85vw", color: "#475569" }}>
+                      <td style={{ padding: "1.2vh 1.2vw", textAlign: "center", fontSize: "0.85vw", color: (status === "deleted" || status === "blocked") ? "rgba(107, 114, 128, 1)" : "#475569" }}>
                         {user.role || "User"}
                       </td>
 
                       {/* Email */}
-                      <td style={{ padding: "1.2vh 1.2vw", textAlign: "center", fontSize: "0.85vw", color: "#475569" }}>
+                      <td style={{ padding: "1.2vh 1.2vw", textAlign: "center", fontSize: "0.85vw", color: (status === "deleted" || status === "blocked") ? "rgba(107, 114, 128, 1)" : "#475569" }}>
                         {user.email || "-"}
                       </td>
 
                       {/* Joined */}
-                      <td style={{ padding: "1.2vh 1.2vw", textAlign: "center", fontSize: "0.85vw", color: "#475569" }}>
+                      <td style={{ padding: "1.2vh 1.2vw", textAlign: "center", fontSize: "0.85vw", color: (status === "deleted" || status === "blocked") ? "rgba(107, 114, 128, 1)" : "#475569" }}>
                         {formatDate(user.joined)}
                       </td>
 
@@ -364,7 +366,7 @@ export default function UserManagement() {
                       <td style={{ padding: "1.2vh 1.2vw", textAlign: "center" }}>
                         <span style={{
                           fontSize: "0.85vw", fontWeight: 600,
-                          color: status === "active" ? "#16A34A" : status === "blocked" ? "#EF4444" : "#94A3B8",
+                          color: status === "active" ? "#16A34A" : status === "blocked" ? "#EF4444" : "rgba(107, 114, 128, 1)",
                         }}>
                           {status === "active" ? "Active" : status === "blocked" ? "Blocked" : "Deleted"}
                         </span>
@@ -388,11 +390,11 @@ export default function UserManagement() {
                           {/* Block */}
                           <button
                             title="Block"
-                            style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", opacity: status === "blocked" || status === "deleted" ? 0.35 : 1 }}
+                            style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}
                           >
                             <svg style={{ width: "1.3vw", height: "1.3vw" }} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M14.418 20.9587H9.58464C8.84297 20.9587 7.89297 20.567 7.3763 20.042L3.95964 16.6253C3.43464 16.1003 3.04297 15.1503 3.04297 14.417V9.58366C3.04297 8.842 3.43464 7.892 3.95964 7.37534L7.3763 3.95866C7.9013 3.43366 8.85131 3.04199 9.58464 3.04199H14.418C15.1596 3.04199 16.1096 3.43366 16.6263 3.95866L20.043 7.37534C20.568 7.90034 20.9596 8.85033 20.9596 9.58366V14.417C20.9596 15.1587 20.568 16.1086 20.043 16.6253L16.6263 20.042C16.1013 20.567 15.1596 20.9587 14.418 20.9587ZM9.58464 4.29199C9.17631 4.29199 8.54296 4.55033 8.25963 4.842L4.84297 8.25867C4.55964 8.55033 4.29297 9.17533 4.29297 9.58366V14.417C4.29297 14.8253 4.55131 15.4587 4.84297 15.742L8.25963 19.1587C8.5513 19.442 9.17631 19.7087 9.58464 19.7087H14.418C14.8263 19.7087 15.4596 19.4503 15.743 19.1587L19.1596 15.742C19.443 15.4503 19.7096 14.8253 19.7096 14.417V9.58366C19.7096 9.17533 19.4513 8.542 19.1596 8.25867L15.743 4.842C15.4513 4.55866 14.8263 4.29199 14.418 4.29199H9.58464Z" fill="#475569"/>
-                              <path d="M6.1151 18.5254C5.95677 18.5254 5.79844 18.467 5.67344 18.342C5.43177 18.1004 5.43177 17.7004 5.67344 17.4587L17.4568 5.67539C17.6984 5.43372 18.0984 5.43372 18.3401 5.67539C18.5818 5.91706 18.5818 6.31706 18.3401 6.55872L6.55677 18.342C6.43177 18.467 6.27344 18.5254 6.1151 18.5254Z" fill="#475569"/>
+                              <path d="M14.418 20.9587H9.58464C8.84297 20.9587 7.89297 20.567 7.3763 20.042L3.95964 16.6253C3.43464 16.1003 3.04297 15.1503 3.04297 14.417V9.58366C3.04297 8.842 3.43464 7.892 3.95964 7.37534L7.3763 3.95866C7.9013 3.43366 8.85131 3.04199 9.58464 3.04199H14.418C15.1596 3.04199 16.1096 3.43366 16.6263 3.95866L20.043 7.37534C20.568 7.90034 20.9596 8.85033 20.9596 9.58366V14.417C20.9596 15.1587 20.568 16.1086 20.043 16.6253L16.6263 20.042C16.1013 20.567 15.1596 20.9587 14.418 20.9587ZM9.58464 4.29199C9.17631 4.29199 8.54296 4.55033 8.25963 4.842L4.84297 8.25867C4.55964 8.55033 4.29297 9.17533 4.29297 9.58366V14.417C4.29297 14.8253 4.55131 15.4587 4.84297 15.742L8.25963 19.1587C8.5513 19.442 9.17631 19.7087 9.58464 19.7087H14.418C14.8263 19.7087 15.4596 19.4503 15.743 19.1587L19.1596 15.742C19.443 15.4503 19.7096 14.8253 19.7096 14.417V9.58366C19.7096 9.17533 19.4513 8.542 19.1596 8.25867L15.743 4.842C15.4513 4.55866 14.8263 4.29199 14.418 4.29199H9.58464Z" fill={(status === "blocked" || status === "deleted") ? "rgba(107, 114, 128, 1)" : "#475569"}/>
+                              <path d="M6.1151 18.5254C5.95677 18.5254 5.79844 18.467 5.67344 18.342C5.43177 18.1004 5.43177 17.7004 5.67344 17.4587L17.4568 5.67539C17.6984 5.43372 18.0984 5.43372 18.3401 5.67539C18.5818 5.91706 18.5818 6.31706 18.3401 6.55872L6.55677 18.342C6.43177 18.467 6.27344 18.5254 6.1151 18.5254Z" fill={(status === "blocked" || status === "deleted") ? "rgba(107, 114, 128, 1)" : "#475569"}/>
                             </svg>
                           </button>
 
