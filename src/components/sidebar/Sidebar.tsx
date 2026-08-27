@@ -60,6 +60,7 @@ const IconBell = () => (
   </svg>
 );
 import { cn } from "@/libs/utils";
+import { useState } from "react";
 
 const navItems = [
   { label: "Dashboard",         href: "/dashboard",         icon: IconDashboard },
@@ -72,8 +73,10 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
+    <>
     <aside
       className="flex flex-col sticky top-0 overflow-hidden"
       style={{ width: "16vw", height: "100vh", padding: "0.5vh 1vw", backgroundColor: "rgba(21, 34, 63, 1)" }}
@@ -107,6 +110,7 @@ export default function Sidebar() {
       {/* Logout */}
       <div className="mt-auto" style={{ marginBottom: "2vh", padding: "0 0.8vw" }}>
         <button
+          onClick={() => setShowLogoutModal(true)}
           className="relative flex items-center justify-center rounded-full font-medium bg-white hover:bg-white/90 transition-colors"
           style={{ padding: "1.4vh 0.8vw", fontSize: "1vw", width: "100%", color: "rgba(255, 68, 68, 1)" }}
         >
@@ -121,5 +125,33 @@ export default function Sidebar() {
         </button>
       </div>
     </aside>
+
+    {showLogoutModal && (
+      <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999 }}>
+        <div style={{ backgroundColor: "#fff", borderRadius: "20px", padding: "5vh 2vw 4vh", width: "22vw", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5vh" }}>
+          <p style={{ fontSize: "1.3vw", fontWeight: 700, color: "rgba(18, 18, 18, 1)", textAlign: "center", margin: 0, fontFamily: "Poppins" }}>
+            Logout?
+          </p>
+          <p style={{ fontSize: "1vw", fontWeight: 500, color: "rgba(107, 114, 128, 1)", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
+            Are you sure you want to logout?
+          </p>
+          <div style={{ display: "flex", gap: "1vw", width: "100%", marginTop: "0.5vh" }}>
+            <button
+              onClick={() => setShowLogoutModal(false)}
+              style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "1px solid rgba(255, 68, 68, 1)", background: "#fff", fontSize: "1vw", fontWeight: 500, color: "rgba(255, 68, 68, 1)", cursor: "pointer", fontFamily: "Poppins" }}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => { setShowLogoutModal(false); }}
+              style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "none", background: "rgba(255, 68, 68, 1)", fontSize: "1vw", fontWeight: 500, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

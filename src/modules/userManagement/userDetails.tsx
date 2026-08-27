@@ -303,7 +303,7 @@ export default function UserDetails() {
             </div>
 
             {/* Text */}
-            <p style={{ fontSize: "1vw", fontWeight: 600, color: "#1C1B17", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh" }}>
+            <p style={{ fontSize: "1vw", fontWeight: 500, color: "rgba(107, 114, 128, 1)", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
               Are you sure you want to Delete<br />this user?
             </p>
 
@@ -311,13 +311,13 @@ export default function UserDetails() {
             <div style={{ display: "flex", gap: "1vw", width: "100%", marginTop: "0.5vh" }}>
               <button
                 onClick={() => setShowDeleteModal(false)}
-                style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "1.5px solid #E2E8F0", background: "#fff", fontSize: "0.9vw", fontWeight: 600, color: "#1C1B17", cursor: "pointer" }}
+                style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "1px solid rgba(255, 68, 68, 1)", background: "#fff", fontSize: "1vw", fontWeight: 500, color: "rgba(255, 68, 68, 1)", cursor: "pointer", fontFamily: "Poppins" }}
               >
                 Cancel
               </button>
               <button
                 onClick={() => { setShowDeleteModal(false); router.back(); }}
-                style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "none", background: "#EF4444", fontSize: "0.9vw", fontWeight: 600, color: "#fff", cursor: "pointer" }}
+                style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "none", background: "rgba(255, 68, 68, 1)", fontSize: "1vw", fontWeight: 500, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}
               >
                 Delete
               </button>
@@ -341,7 +341,7 @@ export default function UserDetails() {
             </div>
 
             {/* Text */}
-            <p style={{ fontSize: "1vw", fontWeight: 600, color: "#1C1B17", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh" }}>
+            <p style={{ fontSize: "1vw", fontWeight: 500, color: "rgba(107, 114, 128, 1)", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
               Are you sure you want to Block<br />this user?
             </p>
 
@@ -349,13 +349,13 @@ export default function UserDetails() {
             <div style={{ display: "flex", gap: "1vw", width: "100%", marginTop: "0.5vh" }}>
               <button
                 onClick={() => setShowBlockModal(false)}
-                style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "1.5px solid #E2E8F0", background: "#fff", fontSize: "0.9vw", fontWeight: 600, color: "#1C1B17", cursor: "pointer" }}
+                style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "1px solid rgba(255, 68, 68, 1)", background: "#fff", fontSize: "1vw", fontWeight: 500, color: "rgba(255, 68, 68, 1)", cursor: "pointer", fontFamily: "Poppins" }}
               >
                 Cancel
               </button>
               <button
                 onClick={() => { setIsBlocked(true); setShowBlockModal(false); }}
-                style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "none", background: "#EF4444", fontSize: "0.9vw", fontWeight: 600, color: "#fff", cursor: "pointer" }}
+                style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "none", background: "rgba(255, 68, 68, 1)", fontSize: "1vw", fontWeight: 500, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}
               >
                 Block
               </button>

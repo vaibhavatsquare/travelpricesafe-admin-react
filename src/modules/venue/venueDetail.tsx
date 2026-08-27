@@ -470,12 +470,12 @@ export default function VenueDetail({ id }: { id: string }) {
                     <path d="M15.0026 36.6663H25.0026C33.3359 36.6663 36.6693 33.333 36.6693 24.9997V14.9997C36.6693 6.66634 33.3359 3.33301 25.0026 3.33301H15.0026C6.66927 3.33301 3.33594 6.66634 3.33594 14.9997V24.9997C3.33594 33.333 6.66927 36.6663 15.0026 36.6663Z" stroke="#FF4444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <p style={{ fontSize: "1vw", fontWeight: 600, color: "#1C1B17", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
+                <p style={{ fontSize: "1vw", fontWeight: 500, color: "rgba(107, 114, 128, 1)", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
                   Are you sure you want to Block<br />this venue?
                 </p>
                 <div style={{ display: "flex", gap: "1vw", width: "100%", marginTop: "0.5vh" }}>
-                  <button onClick={() => setShowBlockModal(false)} style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "1.5px solid #E2E8F0", background: "#fff", fontSize: "0.9vw", fontWeight: 600, color: "#1C1B17", cursor: "pointer", fontFamily: "Poppins" }}>Cancel</button>
-                  <button onClick={() => { setIsBlocked(true); setShowBlockModal(false); }} style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "none", background: "#EF4444", fontSize: "0.9vw", fontWeight: 600, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}>Block</button>
+                  <button onClick={() => setShowBlockModal(false)} style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "1px solid rgba(255, 68, 68, 1)", background: "#fff", fontSize: "1vw", fontWeight: 500, color: "rgba(255, 68, 68, 1)", cursor: "pointer", fontFamily: "Poppins" }}>Cancel</button>
+                  <button onClick={() => { setIsBlocked(true); setShowBlockModal(false); }} style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "none", background: "rgba(255, 68, 68, 1)", fontSize: "1vw", fontWeight: 500, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}>Block</button>
                 </div>
               </div>
             </div>
@@ -498,12 +498,12 @@ export default function VenueDetail({ id }: { id: string }) {
                     </defs>
                   </svg>
                 </div>
-                <p style={{ fontSize: "1vw", fontWeight: 600, color: "#1C1B17", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
+                <p style={{ fontSize: "1vw", fontWeight: 500, color: "rgba(107, 114, 128, 1)", textAlign: "center", lineHeight: 1.5, margin: 0, paddingBottom: "2.5vh", fontFamily: "Poppins" }}>
                   Are you sure you want to Delete<br />this venue?
                 </p>
                 <div style={{ display: "flex", gap: "1vw", width: "100%", marginTop: "0.5vh" }}>
-                  <button onClick={() => setShowDeleteModal(false)} style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "1.5px solid #E2E8F0", background: "#fff", fontSize: "0.9vw", fontWeight: 600, color: "#1C1B17", cursor: "pointer", fontFamily: "Poppins" }}>Cancel</button>
-                  <button onClick={() => { setIsDeleted(true); setShowDeleteModal(false); }} style={{ flex: 1, padding: "1.2vh 0", borderRadius: "2vw", border: "none", background: "#EF4444", fontSize: "0.9vw", fontWeight: 600, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}>Delete</button>
+                  <button onClick={() => setShowDeleteModal(false)} style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "1px solid rgba(255, 68, 68, 1)", background: "#fff", fontSize: "1vw", fontWeight: 500, color: "rgba(255, 68, 68, 1)", cursor: "pointer", fontFamily: "Poppins" }}>Cancel</button>
+                  <button onClick={() => { setIsDeleted(true); setShowDeleteModal(false); }} style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "none", background: "rgba(255, 68, 68, 1)", fontSize: "1vw", fontWeight: 500, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}>Delete</button>
                 </div>
               </div>
             </div>
