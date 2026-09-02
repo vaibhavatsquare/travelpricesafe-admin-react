@@ -18,16 +18,16 @@ type NotificationItem = {
 };
 
 const mockNotifications: NotificationItem[] = [
-    { id: 1,  title: "New deal in Miami",                              message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
-    { id: 2,  title: "Weekly Safety Digest",                           message: "Your weekly summary of safety reports is ready to review.",    date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
-    { id: 3,  title: "App update available",                           message: "Version 2.4 is now available with improved deal search.",      date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
-    { id: 4,  title: "New venue: Pike Place Oysters",                  message: "Version 2.4 is now available with improved deal search.",      date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
-    { id: 5,  title: "New deal in Miami",                              message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
-    { id: 6,  title: "Weekly Safety Digest",                           message: "Your weekly summary of safety reports is ready to review.",    date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
-    { id: 7,  title: "App update available",                           message: "Version 2.4 is now available with improved deal search.",      date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
-    { id: 8,  title: "Emma Davis left a 5-star review on Skyline Rooftop Bar", message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
-    { id: 9,  title: "New deal in Miami",                              message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
-    { id: 10, title: "Weekly Safety Digest",                           message: "Your weekly summary of safety reports is ready to review.",    date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
+    { id: 1, title: "New deal in Miami", message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
+    { id: 2, title: "Weekly Safety Digest", message: "Your weekly summary of safety reports is ready to review.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
+    { id: 3, title: "App update available", message: "Version 2.4 is now available with improved deal search.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
+    { id: 4, title: "New venue: Pike Place Oysters", message: "Version 2.4 is now available with improved deal search.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
+    { id: 5, title: "New deal in Miami", message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
+    { id: 6, title: "Weekly Safety Digest", message: "Your weekly summary of safety reports is ready to review.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
+    { id: 7, title: "App update available", message: "Version 2.4 is now available with improved deal search.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
+    { id: 8, title: "Emma Davis left a 5-star review on Skyline Rooftop Bar", message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "scheduled" },
+    { id: 9, title: "New deal in Miami", message: "Ocean Grill Miami just launched a 2-for-1 oyster tower deal.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
+    { id: 10, title: "Weekly Safety Digest", message: "Your weekly summary of safety reports is ready to review.", date: "2025-05-20 10:24", audience: "All Users", recipients: "12,450 recipients", status: "delivered" },
 ];
 
 const audienceOptions = [
@@ -40,10 +40,10 @@ const audienceOptions = [
 function BellIcon() {
     return (
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-            <rect width="40" height="40" rx="20" fill="#FE6E39"/>
-            <path d="M20 14.9023V17.9548" stroke="white" strokeWidth="1.3" strokeMiterlimit="10" strokeLinecap="round"/>
-            <path d="M20.018 10.834C16.6447 10.834 13.913 13.5657 13.913 16.939V18.864C13.913 19.4873 13.6563 20.4223 13.3355 20.954L12.1713 22.8973C11.4563 24.0982 11.9513 25.4365 13.2713 25.8765C17.653 27.334 22.3922 27.334 26.7738 25.8765C28.0113 25.464 28.543 24.0157 27.8738 22.8973L26.7097 20.954C26.3888 20.4223 26.1322 19.4782 26.1322 18.864V16.939C26.123 13.584 23.373 10.834 20.018 10.834Z" stroke="white" strokeWidth="1.3" strokeMiterlimit="10" strokeLinecap="round"/>
-            <path d="M23.0542 26.252C23.0542 27.9295 21.6792 29.3045 20.0017 29.3045C19.1676 29.3045 18.3976 28.9561 17.8476 28.4061C17.2976 27.8561 16.9492 27.0861 16.9492 26.252" stroke="white" strokeWidth="1.3" strokeMiterlimit="10"/>
+            <rect width="40" height="40" rx="20" fill="#FE6E39" />
+            <path d="M20 14.9023V17.9548" stroke="white" strokeWidth="1.3" strokeMiterlimit="10" strokeLinecap="round" />
+            <path d="M20.018 10.834C16.6447 10.834 13.913 13.5657 13.913 16.939V18.864C13.913 19.4873 13.6563 20.4223 13.3355 20.954L12.1713 22.8973C11.4563 24.0982 11.9513 25.4365 13.2713 25.8765C17.653 27.334 22.3922 27.334 26.7738 25.8765C28.0113 25.464 28.543 24.0157 27.8738 22.8973L26.7097 20.954C26.3888 20.4223 26.1322 19.4782 26.1322 18.864V16.939C26.123 13.584 23.373 10.834 20.018 10.834Z" stroke="white" strokeWidth="1.3" strokeMiterlimit="10" strokeLinecap="round" />
+            <path d="M23.0542 26.252C23.0542 27.9295 21.6792 29.3045 20.0017 29.3045C19.1676 29.3045 18.3976 28.9561 17.8476 28.4061C17.2976 27.8561 16.9492 27.0861 16.9492 26.252" stroke="white" strokeWidth="1.3" strokeMiterlimit="10" />
         </svg>
     );
 }
@@ -221,8 +221,8 @@ export default function Notifications() {
                         fontFamily: "Poppins", cursor: "pointer",
                     }}>
                         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.92668 3.52584L15.06 7.09251C18.26 8.69251 18.26 11.3092 15.06 12.9092L7.92668 16.4758C3.12668 18.8758 1.16835 16.9092 3.56835 12.1175L4.29335 10.6758C4.47668 10.3092 4.47668 9.70084 4.29335 9.33418L3.56835 7.88418C1.16835 3.09251 3.13502 1.12584 7.92668 3.52584Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M4.53516 10H9.03516" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.92668 3.52584L15.06 7.09251C18.26 8.69251 18.26 11.3092 15.06 12.9092L7.92668 16.4758C3.12668 18.8758 1.16835 16.9092 3.56835 12.1175L4.29335 10.6758C4.47668 10.3092 4.47668 9.70084 4.29335 9.33418L3.56835 7.88418C1.16835 3.09251 3.13502 1.12584 7.92668 3.52584Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M4.53516 10H9.03516" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         Send notification
                     </button>
