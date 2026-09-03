@@ -37,7 +37,7 @@ export default function Navbar() {
     >
       {/* Left — Page Title */}
       <div>
-        <p style={{ fontSize: "1.4vw", fontWeight: 600, color: "#1C1B17", lineHeight: 1.2, whiteSpace: "nowrap" }}>
+        <p style={{ fontSize: page.title === "Dashboard" ? "1.8vw" : "1.4vw", fontWeight: page.title === "Dashboard" ? 500 : 500, color: "#1C1B17", lineHeight: 1.2, whiteSpace: "nowrap" }}>
           {page.title}
         </p>
         {page.subtitle && (
