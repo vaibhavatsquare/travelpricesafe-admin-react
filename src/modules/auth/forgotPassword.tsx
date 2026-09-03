@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { createClient } from "@/libs/supabase/client";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -14,13 +15,22 @@ export default function ForgotPassword() {
     setEmailError(isValid || value === "" ? "" : "Invalid Email address");
   };
 
+  const supabase = createClient();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (emailError || !email) return;
     setLoading(true);
-    // TODO: wire up forgot password API
-    await new Promise((r) => setTimeout(r, 1200));
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+
     setLoading(false);
+    if (error) {
+      setEmailError("Something went wrong. Please try again.");
+      return;
+    }
     setSent(true);
   };
 

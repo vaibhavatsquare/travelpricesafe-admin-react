@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
 
 const pageConfig: Record<string, { title: string; subtitle: string }> = {
   "/dashboard":      { title: "Dashboard",         subtitle: "" },
@@ -15,7 +14,6 @@ const pageConfig: Record<string, { title: string; subtitle: string }> = {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const page = Object.entries(pageConfig).find(([key]) => pathname === key || pathname.startsWith(key + "/"))?.[1] ?? { title: "Admin Panel", subtitle: "" };
 
@@ -52,12 +50,10 @@ export default function Navbar() {
       {/* Right — Profile */}
       <div style={{ position: "relative" }}>
         <div
-          onClick={() => setDropdownOpen(!dropdownOpen)}
           style={{
             display: "flex",
             alignItems: "center",
             gap: "0.6vw",
-            cursor: "pointer",
             border: "1px solid #F1F5F9",
             borderRadius: "2vw",
             padding: "0.7vh 1vw",
@@ -82,7 +78,6 @@ export default function Navbar() {
               height={40}
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
               onError={(e) => {
-                // Fallback to initials if image fails
                 (e.target as HTMLImageElement).style.display = "none";
               }}
             />
@@ -97,60 +92,7 @@ export default function Navbar() {
               admin@travelpricesafe.com
             </p>
           </div>
-
-          {/* Chevron */}
-          <svg
-            viewBox="0 0 24 24" fill="none"
-            stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            style={{ width: "1.1vw", height: "1.1vw", transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
         </div>
-
-        {/* Dropdown */}
-        {dropdownOpen && (
-          <div
-            style={{
-              position: "absolute",
-              top: "calc(100% + 1vh)",
-              right: 0,
-              backgroundColor: "rgba(243, 243, 243, 1)",
-              border: "1px solid #F1F5F9",
-              borderRadius: "0.7vw",
-              boxShadow: "0 0.5vh 1.5vw rgba(0,0,0,0.08)",
-              width: "12.5vw",
-              overflow: "hidden",
-              zIndex: 100,
-            }}
-          >
-            <div
-              onClick={() => {
-                setDropdownOpen(false);
-                // handleLogout();
-              }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.7vw",
-                padding: "1.3vh 1.1vw",
-                cursor: "pointer",
-                fontSize: "1vw",
-                color: "#EF4444",
-                fontWeight: 500,
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FEF2F2")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
-            >
-              <svg style={{ width: "1.1vw", height: "1.1vw" }} viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                <polyline points="16 17 21 12 16 7" />
-                <line x1="21" y1="12" x2="9" y2="12" />
-              </svg>
-              Logout
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

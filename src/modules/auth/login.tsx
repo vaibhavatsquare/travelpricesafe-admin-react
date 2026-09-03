@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/libs/supabase/client";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,16 +18,38 @@ export default function Login() {
     setEmailError(isValid || value === "" ? "" : "Invalid Email address");
   };
 
+  const router = useRouter();
+  const supabase = createClient();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError("");
     if (emailError) return;
     setLoading(true);
-    // TODO: wire up auth API — on failure call:
-    // setAuthError("Incorrect username or password. Please try again.");
-    await new Promise((r) => setTimeout(r, 1200));
-    setAuthError("Incorrect username or password. Please try again.");
-    setLoading(false);
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setAuthError("Incorrect username or password. Please try again.");
+      setLoading(false);
+      return;
+    }
+
+    // Block non-admin users
+    const { data: userRecord } = await supabase
+      .from("users")
+      .select("user_type, is_delete")
+      .eq("auth_id", data.user.id)
+      .single();
+
+    if (!userRecord || userRecord.user_type !== "admin" || userRecord.is_delete) {
+      await supabase.auth.signOut();
+      setAuthError("You are not authorized to access the admin panel.");
+      setLoading(false);
+      return;
+    }
+
+    router.push("/dashboard");
   };
 
   return (

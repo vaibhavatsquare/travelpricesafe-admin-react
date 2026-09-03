@@ -61,6 +61,8 @@ const IconBell = () => (
 );
 import { cn } from "@/libs/utils";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/libs/supabase/client";
 
 const navItems = [
   { label: "Dashboard",         href: "/dashboard",         icon: IconDashboard },
@@ -74,6 +76,14 @@ const navItems = [
 export default function Sidebar() {
   const pathname = usePathname();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setShowLogoutModal(false);
+    router.push("/login");
+  };
 
   return (
     <>
@@ -143,7 +153,7 @@ export default function Sidebar() {
               Cancel
             </button>
             <button
-              onClick={() => { setShowLogoutModal(false); }}
+              onClick={handleLogout}
               style={{ flex: 1, padding: "1.2vh 1vw", borderRadius: "2vw", border: "none", background: "rgba(255, 68, 68, 1)", fontSize: "1vw", fontWeight: 500, color: "#fff", cursor: "pointer", fontFamily: "Poppins" }}
             >
               Logout
