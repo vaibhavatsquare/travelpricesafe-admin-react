@@ -1,6 +1,6 @@
+import { Suspense } from "react";
 import AddVenue from "@/modules/venue/addVenue";
 
-// Mock — replace with real API fetch using params.id
 const mockVenueData = {
   venueName: "The Hudson Restaurant",
   phone: "+1 234 567 8900",
@@ -14,6 +14,11 @@ const mockVenueData = {
   images: [],
 };
 
-export default function EditVenuePage({ params }: { params: { id: string } }) {
-  return <AddVenue isEdit={true} initialData={mockVenueData} />;
+export default async function EditVenuePage({ params }: { params: Promise<{ id: string }> }) {
+  await params;
+  return (
+    <Suspense fallback={<div />}>
+      <AddVenue isEdit={true} initialData={mockVenueData} />
+    </Suspense>
+  );
 }
