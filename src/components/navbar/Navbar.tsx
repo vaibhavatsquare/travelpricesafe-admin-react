@@ -46,7 +46,6 @@ export default function Navbar() {
           </p>
         )}
       </div>
-
       {/* Right — Profile */}
       <div style={{ position: "relative" }}>
         <div
