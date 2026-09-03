@@ -343,7 +343,7 @@ export default function DealDetails({ params }: { params: { id: string } }) {
                         </div>
 
                         {/* Edit */}
-                        <button style={{
+                        <button onClick={() => router.push(`/deals/${deal.id}/edit`)} style={{
                             display: "flex", alignItems: "center", gap: "0.4vw",
                             background: "none", border: "none", cursor: "pointer",
                             fontSize: "14px", fontWeight: 500, color: "#1C1B17", fontFamily: "Poppins",

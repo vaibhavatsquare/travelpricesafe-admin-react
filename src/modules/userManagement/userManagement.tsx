@@ -222,20 +222,7 @@ export default function UserManagement() {
         u.is_deleted;
       return matchSearch && matchStatus;
     })
-    .sort((a, b) => {
-      if (!sortKey) return 0;
-      if (sortKey === "name") {
-        const nameA = `${a.first_name} ${a.last_name}`;
-        const nameB = `${b.first_name} ${b.last_name}`;
-        return sortDir === "asc" ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-      }
-      if (sortKey === "joined") {
-        return sortDir === "asc"
-          ? new Date(a.joined).getTime() - new Date(b.joined).getTime()
-          : new Date(b.joined).getTime() - new Date(a.joined).getTime();
-      }
-      return 0;
-    });
+    .sort(() => 0);
 
   const columns = ["Profile", "User Name", "Currency", "Email", "Joined", "Status", "Actions"];
 
@@ -322,6 +309,7 @@ export default function UserManagement() {
                   return (
                     <tr
                       key={user.id}
+                      onClick={() => router.push(`/user-management/${user.uuid}`)}
                       style={{ borderBottom: "1px solid #F8FAFC", backgroundColor: "#fff", cursor: "pointer" }}
                       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FAFAFA")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#fff")}
@@ -374,7 +362,7 @@ export default function UserManagement() {
 
                       {/* Actions */}
                       <td style={{ padding: "1.2vh 1.2vw" }}>
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.2vw" }}>
+                        <div onClick={(e) => e.stopPropagation()} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.2vw" }}>
                           {/* View */}
                           <button
                             onClick={() => router.push(`/user-management/${user.uuid}`)}

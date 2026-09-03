@@ -279,12 +279,7 @@ export default function VenueManagement() {
       const matchStatus = statusFilter === "all" ? true : statusFilter === "blocked" ? v.is_blocked : statusFilter === "deleted" ? v.is_deleted : !v.is_blocked && !v.is_deleted;
       return matchSearch && matchCategory && matchStatus;
     })
-    .sort((a, b) => {
-      if (!sortKey) return 0;
-      if (sortKey === "name") return sortDir === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-      if (sortKey === "price") return sortDir === "asc" ? a.avg_price - b.avg_price : b.avg_price - a.avg_price;
-      return 0;
-    });
+    .sort(() => 0);
 
   const columns = ["Venue", "Category", "City", "Avg. price", "Deals", "Status", "Actions"];
 
@@ -387,6 +382,7 @@ export default function VenueManagement() {
                   return (
                     <tr
                       key={venue.id}
+                      onClick={() => router.push(`/venue/${venue.uuid}`)}
                       style={{ borderBottom: "1px solid #F8FAFC", backgroundColor: "#fff", cursor: "pointer" }}
                       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FAFAFA")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#fff")}
@@ -444,7 +440,7 @@ export default function VenueManagement() {
 
                       {/* Actions */}
                       <td style={{ padding: "1.2vh 1.6vw" }}>
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.2vw" }}>
+                        <div onClick={(e) => e.stopPropagation()} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.2vw" }}>
                           {/* View */}
                           <button
                             onClick={() => router.push(`/venue/${venue.uuid}`)}

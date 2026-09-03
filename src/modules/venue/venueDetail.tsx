@@ -255,7 +255,7 @@ export default function VenueDetail({ id }: { id: string }) {
             {/* Name + Edit */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <p style={{ fontSize: "1.05vw", fontWeight: 600, color: (isBlocked || isDeleted) ? "rgba(107, 114, 128, 1)" : "var(--Text, rgba(18, 18, 18, 1))", fontFamily: "Poppins" }}>{venue.name}</p>
-              <button style={{ display: "flex", alignItems: "center", gap: "0.3vw", background: "none", border: "none", cursor: "pointer", fontSize: "0.85vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins" }}>
+              <button onClick={() => router.push(`/venue/${venue.id}/edit`)} style={{ display: "flex", alignItems: "center", gap: "0.3vw", background: "none", border: "none", cursor: "pointer", fontSize: "0.85vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins" }}>
                 <svg style={{ width: "1vw", height: "1vw" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M13.2594 3.60022L5.04936 12.2902C4.73936 12.6202 4.43936 13.2702 4.37936 13.7202L4.00936 16.9602C3.87936 18.1302 4.71936 18.9302 5.87936 18.7302L9.09936 18.1802C9.54936 18.1002 10.1794 17.7702 10.4894 17.4302L18.6994 8.74022C20.1194 7.24022 20.7594 5.53022 18.5494 3.44022C16.3494 1.37022 14.6794 2.10022 13.2594 3.60022Z" />
                   <path d="M11.8906 5.0498C12.3206 7.8098 14.5606 9.9198 17.3406 10.1998" />
@@ -325,7 +325,7 @@ export default function VenueDetail({ id }: { id: string }) {
                 </svg>
                 <p style={{ fontSize: "105%", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins", letterSpacing: "0.003em" }}>Active Deals</p>
               </div>
-              <button style={{
+              <button onClick={() => router.push("/deals/add")} style={{
                 display: "flex", alignItems: "center", gap: "0.4vw",
                 padding: "1.1vh 1vw", borderRadius: "30px",
                 border: "none", backgroundColor: "#F26522",
@@ -392,7 +392,7 @@ export default function VenueDetail({ id }: { id: string }) {
                             {deal.status}
                           </span>
                         </div>
-                        <button style={{ display: "flex", alignItems: "center", gap: "0.3vw", background: "none", border: "none", cursor: "pointer", fontSize: "0.8vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins" }}>
+                        <button onClick={() => router.push(`/deals/${deal.id}/edit`)} style={{ display: "flex", alignItems: "center", gap: "0.3vw", background: "none", border: "none", cursor: "pointer", fontSize: "0.8vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins" }}>
                           <svg style={{ width: "0.9vw", height: "0.9vw" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M13.2594 3.60022L5.04936 12.2902C4.73936 12.6202 4.43936 13.2702 4.37936 13.7202L4.00936 16.9602C3.87936 18.1302 4.71936 18.9302 5.87936 18.7302L9.09936 18.1802C9.54936 18.1002 10.1794 17.7702 10.4894 17.4302L18.6994 8.74022C20.1194 7.24022 20.7594 5.53022 18.5494 3.44022C16.3494 1.37022 14.6794 2.10022 13.2594 3.60022Z" />
                             <path d="M11.8906 5.0498C12.3206 7.8098 14.5606 9.9198 17.3406 10.1998" />
@@ -418,7 +418,7 @@ export default function VenueDetail({ id }: { id: string }) {
           )}
 
           {/* Experiences */}
-          <div style={{ backgroundColor: (isBlocked || isDeleted) ? "rgb(231, 231, 231)" : "#fff", borderRadius: "20px", border: "1px solid #F1F5F9", padding: "1.5vw", flex: 1, display: "flex", flexDirection: "column" }}>
+          <div style={{ backgroundColor: (isBlocked || isDeleted) ? "rgb(231, 231, 231)" : "#fff", borderRadius: "20px", border: "1px solid #F1F5F9", padding: "1.5vw", display: "flex", flexDirection: "column" }}>
             {/* Header */}
             <div style={{ display: "flex", alignItems: "center", gap: "0.8vw", marginBottom: "1.5vh" }}>
               <svg style={{ width: "1.2vw", height: "1.2vw" }} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -610,7 +610,7 @@ export default function VenueDetail({ id }: { id: string }) {
                 </svg>
                 <p style={{ fontSize: "105%", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins", letterSpacing: "0.003em" }}>Business Hours</p>
               </div>
-              <button style={{ display: "flex", alignItems: "center", gap: "0.3vw", background: "none", border: "none", cursor: "pointer", fontSize: "0.8vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins" }}>
+              <button onClick={() => router.push(`/venue/${venue.id}/edit?tab=hours`)} style={{ display: "flex", alignItems: "center", gap: "0.3vw", background: "none", border: "none", cursor: "pointer", fontSize: "0.8vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins" }}>
                 <svg style={{ width: "0.9vw", height: "0.9vw" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M13.2594 3.60022L5.04936 12.2902C4.73936 12.6202 4.43936 13.2702 4.37936 13.7202L4.00936 16.9602C3.87936 18.1302 4.71936 18.9302 5.87936 18.7302L9.09936 18.1802C9.54936 18.1002 10.1794 17.7702 10.4894 17.4302L18.6994 8.74022C20.1194 7.24022 20.7594 5.53022 18.5494 3.44022C16.3494 1.37022 14.6794 2.10022 13.2594 3.60022Z" />
                   <path d="M11.8906 5.0498C12.3206 7.8098 14.5606 9.9198 17.3406 10.1998" />

@@ -227,6 +227,7 @@ export default function DealManagement() {
                 filtered.map((deal) => (
                   <tr
                     key={deal.id}
+                    onClick={() => router.push(`/deals/${deal.id}`)}
                     style={{ borderBottom: "1px solid #F8FAFC", backgroundColor: "#fff", cursor: "pointer" }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FAFAFA")}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#fff")}
@@ -278,7 +279,7 @@ export default function DealManagement() {
 
                     {/* Actions */}
                     <td style={{ padding: "1.2vh 1.6vw" }}>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1vw" }}>
+                      <div onClick={(e) => e.stopPropagation()} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1vw" }}>
                         {/* View */}
                         <button title="View" onClick={() => router.push(`/deals/${deal.id}`)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}>
                           <svg style={{ width: "1.3vw", height: "1.3vw" }} viewBox="0 0 24 24" fill="none" stroke="rgba(18,18,18,1)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -288,7 +289,7 @@ export default function DealManagement() {
                         </button>
 
                         {/* Edit */}
-                        <button title="Edit" style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}>
+                        <button title="Edit" onClick={() => router.push(`/deals/${deal.id}/edit`)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}>
                           <svg style={{ width: "1.3vw", height: "1.3vw" }} viewBox="0 0 24 24" fill="none" stroke={deal.status === "deleted" ? "rgba(107,114,128,1)" : "rgba(18,18,18,1)"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M13.26 3.6L5.05 12.29C4.74 12.62 4.44 13.27 4.38 13.72L4.01 16.96C3.88 18.13 4.72 18.93 5.88 18.73L9.1 18.18C9.55 18.1 10.18 17.77 10.49 17.43L18.7 8.74C20.12 7.24 20.76 5.53 18.55 3.44C16.35 1.37 14.68 2.1 13.26 3.6Z" />
                             <path d="M11.89 5.05C12.32 7.81 14.56 9.92 17.34 10.2" />

@@ -125,19 +125,31 @@ const ClockIcon = () => (
     </svg>
 );
 
-export default function AddDeal() {
-    const [isEdited, setIsEdited] = useState(false);
+type DealInitialData = {
+    venue?: string;
+    dealTitle?: string;
+    description?: string;
+    discount?: string;
+    dealPrice?: string;
+    currency?: string;
+    images?: string[];
+    startTime?: string;
+    endTime?: string;
+};
+
+export default function AddDeal({ isEdit = false, initialData = {} }: { isEdit?: boolean; initialData?: DealInitialData }) {
+    const [isEdited, setIsEdited] = useState(isEdit);
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [venue, setVenue] = useState("");
-    const [dealTitle, setDealTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [discount, setDiscount] = useState("");
-    const [dealPrice, setDealPrice] = useState("");
-    const [currency, setCurrency] = useState("");
-     const [images, setImages] = useState<string[]>([]);
-    const [startTime, setStartTime] = useState("09:00");
-    const [endTime, setEndTime] = useState("21:00");
+    const [venue, setVenue] = useState(initialData.venue ?? "");
+    const [dealTitle, setDealTitle] = useState(initialData.dealTitle ?? "");
+    const [description, setDescription] = useState(initialData.description ?? "");
+    const [discount, setDiscount] = useState(initialData.discount ?? "");
+    const [dealPrice, setDealPrice] = useState(initialData.dealPrice ?? "");
+    const [currency, setCurrency] = useState(initialData.currency ?? "");
+    const [images, setImages] = useState<string[]>(initialData.images ?? []);
+    const [startTime, setStartTime] = useState(initialData.startTime ?? "09:00");
+    const [endTime, setEndTime] = useState(initialData.endTime ?? "21:00");
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(e.target.files || []);

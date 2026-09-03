@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import BusinessHoursTab from "./BusinessHours";
 import VenueSuccess from "./VenueSuccess";
 
@@ -156,22 +156,36 @@ function TextareaField({
 }
 
 // ── Main Component ───────────────────────────────────────────
-export default function AddVenue() {
+type VenueInitialData = {
+  venueName?: string;
+  phone?: string;
+  description?: string;
+  avgPrice?: string;
+  scheduled?: string;
+  category?: string;
+  currency?: string;
+  website?: string;
+  address?: string;
+  images?: string[];
+};
+
+export default function AddVenue({ isEdit = false, initialData = {} }: { isEdit?: boolean; initialData?: VenueInitialData }) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [activeTab, setActiveTab] = useState<Tab>("profile");
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<Tab>(searchParams?.get("tab") === "hours" ? "hours" : "profile");
 
   // Venue Profile state
-  const [venueName, setVenueName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [description, setDescription] = useState("");
-  const [avgPrice, setAvgPrice] = useState("");
-  const [scheduled, setScheduled] = useState("");
-  const [category, setCategory] = useState("");
-  const [currency, setCurrency] = useState("");
-  const [website, setWebsite] = useState("");
-  const [address, setAddress] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [venueName, setVenueName] = useState(initialData.venueName ?? "");
+  const [phone, setPhone] = useState(initialData.phone ?? "");
+  const [description, setDescription] = useState(initialData.description ?? "");
+  const [avgPrice, setAvgPrice] = useState(initialData.avgPrice ?? "");
+  const [scheduled, setScheduled] = useState(initialData.scheduled ?? "");
+  const [category, setCategory] = useState(initialData.category ?? "");
+  const [currency, setCurrency] = useState(initialData.currency ?? "");
+  const [website, setWebsite] = useState(initialData.website ?? "");
+  const [address, setAddress] = useState(initialData.address ?? "");
+  const [images, setImages] = useState<string[]>(initialData.images ?? []);
 const [isDirty, setIsDirty] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -247,9 +261,9 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
       {/* Title Row */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
         <div>
-          <h1 style={{ fontSize: "1.4vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins", fontStyle: "normal", margin: 0 }}>Add Venue</h1>
+          <h1 style={{ fontSize: "1.4vw", fontWeight: 500, color: "rgba(18,18,18,1)", fontFamily: "Poppins", fontStyle: "normal", margin: 0 }}>{isEdit ? "Edit Venue" : "Add Venue"}</h1>
           <p style={{ fontSize: "0.82vw", color: "rgba(107,114,128,1)", fontFamily: "Poppins", marginTop: "0.4vh", fontWeight: 400 }}>
-            Provide the venue details. All fields are required unless marked optional.
+            {isEdit ? "Update the venue details below." : "Provide the venue details. All fields are required unless marked optional."}
           </p>
         </div>
 
@@ -445,7 +459,7 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
-          {activeTab === "profile" ? (isDirty ? "Save Changes" : "Continue with Add Business hours") : "Add Venue"}
+          {activeTab === "profile" ? (isDirty ? "Save Changes" : "Continue with Business Hours") : isEdit ? "Save Changes" : "Add Venue"}
         </button>
       </div>
     </div>

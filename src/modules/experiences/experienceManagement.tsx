@@ -158,11 +158,11 @@ function StatusDropdown({ value, onChange }: { value: StatusFilter; onChange: (v
           setOpen(!open);
         }}
         style={{
-          display: "flex", alignItems: "center", gap: "1.6vw",
+          display: "flex", alignItems: "center", gap: "0.5vw",
           padding: "1.2vh 0.8vw", border: "1px solid #E2E8F0",
           borderRadius: "30px", backgroundColor: "#fff",
           fontSize: "14px", lineHeight: "20px", fontWeight: 500, color: "#1C1B17",
-          cursor: "pointer", whiteSpace: "nowrap", width: "8vw",
+          cursor: "pointer", whiteSpace: "nowrap", minWidth: "8vw", width: "auto",
           justifyContent: "space-between", fontFamily: "Poppins",
         }}
       >
@@ -249,13 +249,7 @@ export default function ExperienceManagement() {
       const matchStatus = statusFilter === "all" || e.status === statusFilter;
       return matchSearch && matchStatus;
     })
-    .sort((a, b) => {
-      if (sortKey === "rating_high") return b.rating - a.rating;
-      if (sortKey === "rating_low") return a.rating - b.rating;
-      if (sortKey === "date_new") return b.id - a.id;
-      if (sortKey === "date_old") return a.id - b.id;
-      return 0;
-    });
+    .sort(() => 0);
 
   const textColor = (exp: Experience) => isMuted(exp) ? "rgba(107,114,128,1)" : "rgba(18,18,18,1)";
 
@@ -385,7 +379,8 @@ export default function ExperienceManagement() {
                 filtered.map((exp) => (
                   <tr
                     key={exp.id}
-                    style={{ borderBottom: "1px solid #F8FAFC", backgroundColor: "#fff" }}
+                    onClick={() => router.push(`/experiences/${exp.id}?status=${exp.status}`)}
+                    style={{ borderBottom: "1px solid #F8FAFC", backgroundColor: "#fff", cursor: "pointer" }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#FAFAFA")}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#fff")}
                   >
@@ -422,13 +417,13 @@ export default function ExperienceManagement() {
                     </td>
 
                     {/* Status */}
-                    <td style={{ padding: "1.2vh 1.2vw", textAlign: "center" }}>
+                    <td onClick={(e) => e.stopPropagation()} style={{ padding: "1.2vh 1.2vw", textAlign: "center" }}>
                       {statusDisplay(exp)}
                     </td>
 
                     {/* Actions */}
                     <td style={{ padding: "1.2vh 1.2vw" }}>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.8vw" }}>
+                      <div onClick={(e) => e.stopPropagation()} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.8vw" }}>
 
                         {/* View */}
                         <button title="View" onClick={() => router.push(`/experiences/${exp.id}?status=${exp.status}`)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}>
